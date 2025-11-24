@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sreeharsh S Dilip | Game Dev</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts: Rajdhani (For Name/Headings) and Inter (For "Normal" text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Normal font for body
+                        display: ['Rajdhani', 'sans-serif'], // Cool font for name/headings
+                    },
+                    colors: {
+                        bg: '#050505',
+                        neon: '#00ff41',
+                        card: 'rgba(20, 20, 20, 0.6)',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.6 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* --- THE COOL BACKGROUND (KEPT) --- */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        #particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- MODERN "NORMAL" CARDS --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 65, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Slideshow */
+        .slide-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+        .slide-image.active { opacity: 1; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+        
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon selection:text-black">
+
+    <!-- The Backgrounds -->
+    <div class="grid-bg"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Clean Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-bg/90 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="font-display font-bold text-xl tracking-wider text-white">Sreeharsh<span class="text-neon">.</span></a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-neon transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            
+            <div class="order-2 md:order-1 fade-up">
+                <span class="text-neon font-medium text-sm tracking-widest uppercase mb-4 block">Indie Game Developer</span>
+                
+                <!-- THE NAME (Kept Cool Font) -->
+                <h1 class="text-6xl md:text-8xl font-display font-bold uppercase leading-none mb-6 text-white tracking-tight">
+                    Sreeharsh<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Dilip</span>
+                </h1>
+                
+                <!-- Normal Text -->
+                <p class="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed font-light">
+                    I build high-performance systems and immersive gameplay loops using Unity & Godot. Based in Kerala, India.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-neon transition-colors">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-8 py-3 bg-white/5 border border-white/10 text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                        Contact Me
+                    </a>
+                </div>
+
+                <div class="mt-10 flex gap-6 text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors text-2xl"><i class="fab fa-github"></i></a>
+                    <a href="#" class="hover:text-white transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2 flex justify-center fade-up" style="transition-delay: 100ms;">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-white/10 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl shadow-neon/10">
+                    <img src="https://ui-avatars.com/api/?name=Sreeharsh+S+Dilip&background=0f0f11&color=00ff41&size=512&font-size=0.33&bold=true" alt="Profile" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-display font-bold text-white mb-12">Featured <span class="text-neon">Work</span></h2>
+
+            <div class="space-y-16">
+                <!-- Project 1: Lost Island -->
+                <div class="glass-card overflow-hidden fade-up">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Image Area -->
+                        <div class="relative h-[300px] md:h-auto bg-black group border-r border-white/5">
+                            <div class="slideshow absolute inset-0">
+                                <img src="Screenshot 2025-07-16 103957.jpg" class="slide-image active" alt="Lost Island">
+                                <img src="Screenshot 2025-07-18 094756.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-18 094829.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-27 194402.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-27 194518.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-11-24 125547.jpg" class="slide-image" alt="Lost Island">
+                            </div>
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+
+                        <!-- Content Area -->
+                        <div class="p-8 md:p-10 flex flex-col justify-center">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-3xl font-display font-bold text-white">Lost Island</h3>
+                                <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded text-neon">UNITY 3D</span>
+                            </div>
+                            
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                A 3D First-Person Shooter featuring a unique monster-taming mechanic where captured enemies fight alongside you. 
+                                I implemented an intelligent NavMesh AI system with distinct patrol, chase, and attack behaviors.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">FPS Mechanics</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">AI / NavMesh</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">State Machines</span>
+                            </div>
+
+                            <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-neon transition-colors">
+                                <i class="fab fa-github text-lg"></i> View Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Cannon Duel -->
+                <div class="glass-card overflow-hidden fade-up">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Content Area (Left on desktop) -->
+                        <div class="p-8 md:p-10 flex flex-col justify-center order-2 md:order-1 border-r border-white/5">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-3xl font-display font-bold text-white">Cannon Duel</h3>
+                                <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded text-neon">UNITY 2D</span>
+                            </div>
+                            
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                A polished 2-player turn-based artillery game. It features custom projectile physics calculated using Sine Waves 
+                                and a custom particle system for impactful explosion visuals.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">Custom Physics</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">Turn-Based</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300">VFX</span>
+                            </div>
+
+                            <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-neon transition-colors">
+                                <i class="fab fa-github text-lg"></i> View Source Code
+                            </a>
+                        </div>
+
+                        <!-- Image Area -->
+                        <div class="relative h-[300px] md:h-auto bg-black group order-1 md:order-2">
+                             <div class="slideshow absolute inset-0">
+                                <img src="res/Cannon Duel/1.jpg" class="slide-image active" alt="Cannon Duel" onerror="this.src='https://placehold.co/800x600/1e1e1e/FFF?text=Cannon+Duel+Image+1'">
+                                <img src="res/Cannon Duel/2.jpg" class="slide-image" alt="Cannon Duel" onerror="this.src='https://placehold.co/800x600/252525/FFF?text=Cannon+Duel+Image+2'">
+                                <img src="res/Cannon Duel/3.jpg" class="slide-image" alt="Cannon Duel" onerror="this.src='https://placehold.co/800x600/101010/FFF?text=Cannon+Duel+Image+3'">
+                           </div>
+                           <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 border-t border-white/5 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-display font-bold text-white mb-12">Technical <span class="text-neon">Skills</span></h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-up">
+                <!-- Simple Clean Cards -->
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fab fa-unity text-4xl text-white mb-2"></i>
+                    <h3 class="font-bold text-white">Unity 3D</h3>
+                    <p class="text-xs text-gray-500">Engine</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <span class="text-4xl font-bold text-blue-400 mb-2 font-display">C#</span>
+                    <h3 class="font-bold text-white">C# Scripting</h3>
+                    <p class="text-xs text-gray-500">Language</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fas fa-robot text-4xl text-blue-500 mb-2"></i>
+                    <h3 class="font-bold text-white">Godot</h3>
+                    <p class="text-xs text-gray-500">Engine</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fas fa-code text-4xl text-green-400 mb-2"></i>
+                    <h3 class="font-bold text-white">GDScript</h3>
+                    <p class="text-xs text-gray-500">Scripting</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <span class="text-4xl font-bold text-blue-300 mb-2 font-display">C</span>
+                    <h3 class="font-bold text-white">C Lang</h3>
+                    <p class="text-xs text-gray-500">Core Logic</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fas fa-bug text-4xl text-red-400 mb-2"></i>
+                    <h3 class="font-bold text-white">Debugging</h3>
+                    <p class="text-xs text-gray-500">QA</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fas fa-cubes text-4xl text-orange-400 mb-2"></i>
+                    <h3 class="font-bold text-white">Level Design</h3>
+                    <p class="text-xs text-gray-500">World Building</p>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col items-center text-center gap-3 hover:bg-white/5">
+                    <i class="fas fa-calculator text-4xl text-purple-400 mb-2"></i>
+                    <h3 class="font-bold text-white">Game Math</h3>
+                    <p class="text-xs text-gray-500">Physics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-display font-bold text-white mb-4">Let's <span class="text-neon">Connect</span></h2>
+            <p class="text-gray-400 mb-12">Open for Game Development opportunities.</p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+                <div class="glass-card px-8 py-4 flex items-center gap-4">
+                    <i class="fas fa-envelope text-neon text-xl"></i>
+                    <div class="text-left">
+                        <span class="text-xs text-gray-500 uppercase font-bold">Email</span>
+                        <p class="text-white font-medium">sreeharshsdilip001@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card px-8 py-4 flex items-center gap-4">
+                    <i class="fas fa-map-marker-alt text-neon text-xl"></i>
+                    <div class="text-left">
+                        <span class="text-xs text-gray-500 uppercase font-bold">Location</span>
+                        <p class="text-white font-medium">Kerala, India <span class="text-neon text-xs ml-1">● Remote</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); showMessage()">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                    <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                </div>
+                <textarea rows="4" placeholder="Your Message..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors resize-none"></textarea>
+                <button class="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-neon transition-colors">
+                    Send Message
+                </button>
+                <p id="form-message" class="text-neon text-sm hidden mt-4">Message sent successfully!</p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-600">
+        <p>&copy; 2025 Sreeharsh S Dilip</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Particle System (Kept background effect)
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width; this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0) this.x = width; if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height; if (this.y > height) this.y = 0;
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        const force = (100 - distance) / 100;
+                        this.vx -= (dx / distance) * force * 0.05;
+                        this.vy -= (dy / distance) * force * 0.05;
+                    }
+                }
+            }
+            draw() {
+                ctx.fillStyle = '#00ff41'; ctx.globalAlpha = 0.4;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function initParticles() { particles = []; for (let i = 0; i < 50; i++) particles.push(new Particle()); }
+        initParticles();
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        ctx.strokeStyle = '#00ff41'; ctx.lineWidth = 0.5; ctx.globalAlpha = 0.1 * (1 - distance / 150);
+                        ctx.beginPath(); ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
+                    }
+                }
+                particles[a].update(); particles[a].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 2. Intersection Observer (Fade Up Animation)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // 3. Slideshow Logic
+        function startSlideshows() {
+            const slideshows = document.querySelectorAll('.slideshow');
+            slideshows.forEach(slideshow => {
+                const images = slideshow.querySelectorAll('.slide-image');
+                if (images.length <= 1) return;
+                let currentIndex = 0;
+                setInterval(() => {
+                    images[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }, 3000);
+            });
+        }
+        startSlideshows();
+
+        // 4. Form Logic
+        function showMessage() {
+            const msg = document.getElementById('form-message');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+</html>
