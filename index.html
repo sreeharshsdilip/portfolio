@@ -177,14 +177,15 @@
                 <div class="glass-card overflow-hidden fade-up">
                     <div class="grid md:grid-cols-2">
                         <!-- Image Area -->
-                        <div class="relative h-[300px] md:h-auto bg-black group border-r border-white/5">
+                        <!-- Changed h-[300px] to w-full aspect-video so it scales perfectly on mobile -->
+                        <div class="relative w-full aspect-video md:aspect-auto md:h-auto bg-black group border-b md:border-b-0 md:border-r border-white/5">
                             <div class="slideshow absolute inset-0">
-                                <img src="res/1.png" class="slide-image active" alt="Lost Island">
-                                <img src="res/2.png" class="slide-image" alt="Lost Island">
-                                <img src="res/3.png" class="slide-image" alt="Lost Island">
-                                <img src="res/4.png" class="slide-image" alt="Lost Island">
-                                <img src="res/5.png" class="slide-image" alt="Lost Island">
-                                <img src="res/6.png" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-16 103957.jpg" class="slide-image active" alt="Lost Island">
+                                <img src="Screenshot 2025-07-18 094756.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-18 094829.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-27 194402.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-07-27 194518.jpg" class="slide-image" alt="Lost Island">
+                                <img src="Screenshot 2025-11-24 125547.jpg" class="slide-image" alt="Lost Island">
                             </div>
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                         </div>
@@ -218,7 +219,7 @@
                 <div class="glass-card overflow-hidden fade-up">
                     <div class="grid md:grid-cols-2">
                         <!-- Content Area (Left on desktop) -->
-                        <div class="p-8 md:p-10 flex flex-col justify-center order-2 md:order-1 border-r border-white/5">
+                        <div class="p-8 md:p-10 flex flex-col justify-center order-2 md:order-1 border-t md:border-t-0 md:border-r border-white/5">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-3xl font-display font-bold text-white">Cannon Duel</h3>
                                 <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded text-neon">UNITY 2D</span>
@@ -241,10 +242,11 @@
                         </div>
 
                         <!-- Image Area -->
-                        <div class="relative h-[300px] md:h-auto bg-black group order-1 md:order-2">
+                        <!-- Changed h-[300px] to w-full aspect-video so it scales perfectly on mobile -->
+                        <div class="relative w-full aspect-video md:aspect-auto md:h-auto bg-black group order-1 md:order-2">
                              <div class="slideshow absolute inset-0">
                                 <img src="res/Cannon Duel/1.png" class="slide-image active" alt="Cannon Duel" onerror="this.src='https://placehold.co/800x600/1e1e1e/FFF?text=Cannon+Duel+Image+1'">
-   
+                                <!-- Assuming other images might be added later -->
                            </div>
                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                         </div>
