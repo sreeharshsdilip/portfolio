@@ -401,22 +401,8 @@
                 </div>
             </div>
 
-            <form class="space-y-4" onsubmit="event.preventDefault(); showMessage()">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
-                    <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
-                </div>
-                <textarea rows="4" placeholder="Your Message..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors resize-none"></textarea>
-                <button class="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-neon transition-colors">
-                    Send Message
-                </button>
-                <p id="form-message" class="text-neon text-sm hidden mt-4">Message sent successfully!</p>
-            </form>
-        </div>
-    </section>
-
     <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-600">
-        <p>&copy; 2025 Sreeharsh S Dilip</p>
+        <p>&copy; 2026 Sreeharsh S Dilip</p>
     </footer>
 
     <!-- Scripts -->
@@ -505,13 +491,6 @@
             });
         }
         startSlideshows();
-
-        // 4. Form Logic
-        function showMessage() {
-            const msg = document.getElementById('form-message');
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 3000);
-        }
     </script>
 </body>
 </html>
